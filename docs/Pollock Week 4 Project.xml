@@ -1,0 +1,732 @@
+<project name="Pollock Week 4 Project" app="Snap! 7, https://snap.berkeley.edu" version="2">
+    <notes>Here in the Notes, I will explain all the custome blocks and their functionalities. &#xD;&#xD;-The Dot Size Block merely draws a dot by moving zero steps and a size variable was created so that size could be manipulated. *An important note is that this block will not succesfully draw a dot if the (Flat line ends) option is checked off in settings. &#xD;&#xD;-The random position custom block sets the X and Y of the turtle to random positions on the screen. This is done by using the pick random operator and stage sensing block. &#xD;&#xD;-The polka dot custom block essentially combines the, Dot Size block, random position block, and color palletes to draw random size, random color, dots at random locations on the screen. The key component of this block is the for loop that iterates through all the colors in the pallete. &#xD;&#xD;-The Display Blue color pallete and Display Rainbow color pallete blocks were used when choosing the colors in the pallete. This also uses a for loop to iterate through all the colors in the created pallete list, however rather than drawing a dot, the turtle is directed to move 30 steps.  &#xD;&#xD;-The blue background colors block utilizes a repeat loop to draw the the (Display blue color pallete) in random locations. &#xD;&#xD;&#xD;</notes>
+    <scenes select="1">
+        <scene name="Pollock Week 4 Project">
+            <notes>Here in the Notes, I will explain all the custome blocks and their functionalities. &#xD;&#xD;-The Dot Size Block merely draws a dot by moving zero steps and a size variable was created so that size could be manipulated. *An important note is that this block will not succesfully draw a dot if the (Flat line ends) option is checked off in settings. &#xD;&#xD;-The random position custom block sets the X and Y of the turtle to random positions on the screen. This is done by using the pick random operator and stage sensing block. &#xD;&#xD;-The polka dot custom block essentially combines the, Dot Size block, random position block, and color palletes to draw random size, random color, dots at random locations on the screen. The key component of this block is the for loop that iterates through all the colors in the pallete. &#xD;&#xD;-The Display Blue color pallete and Display Rainbow color pallete blocks were used when choosing the colors in the pallete. This also uses a for loop to iterate through all the colors in the created pallete list, however rather than drawing a dot, the turtle is directed to move 30 steps.  &#xD;&#xD;-The blue background colors block utilizes a repeat loop to draw the the (Display blue color pallete) in random locations. &#xD;&#xD;&#xD;</notes>
+            <hidden></hidden>
+            <headers></headers>
+            <code></code>
+            <blocks>
+                <block-definition s="Dot %&apos;Size&apos; Size" type="command" category="motion">
+                    <header></header>
+                    <code></code>
+                    <translations></translations>
+                    <inputs>
+                        <input type="%s"></input>
+                    </inputs>
+                    <script>
+                        <block s="setSize">
+                            <block var="Size"/>
+                        </block>
+                        <block s="down"></block>
+                        <block s="forward">
+                            <l>0</l>
+                        </block>
+                        <block s="up"></block>
+                    </script>
+                </block-definition>
+                <block-definition s="random position" type="command" category="motion">
+                    <header></header>
+                    <code></code>
+                    <translations></translations>
+                    <inputs></inputs>
+                    <script>
+                        <block s="gotoXY">
+                            <block s="reportRandom">
+                                <block s="reportAttributeOf">
+                                    <l>
+                                        <option>left</option>
+                                    </l>
+                                    <l>Stage</l>
+                                </block>
+                                <block s="reportAttributeOf">
+                                    <l>
+                                        <option>right</option>
+                                    </l>
+                                    <l>Stage</l>
+                                </block>
+                            </block>
+                            <block s="reportRandom">
+                                <block s="reportAttributeOf">
+                                    <l>
+                                        <option>top</option>
+                                    </l>
+                                    <l>Stage</l>
+                                </block>
+                                <block s="reportAttributeOf">
+                                    <l>
+                                        <option>bottom</option>
+                                    </l>
+                                    <l>Stage</l>
+                                </block>
+                            </block>
+                        </block>
+                    </script>
+                </block-definition>
+                <block-definition s="polka dot" type="command" category="motion">
+                    <header></header>
+                    <code></code>
+                    <translations></translations>
+                    <inputs></inputs>
+                    <script>
+                        <block s="doFor">
+                            <l>i</l>
+                            <l>1</l>
+                            <block s="reportListAttribute">
+                                <l>
+                                    <option>length</option>
+                                </l>
+                                <block var="rainbow color pallete"/>
+                            </block>
+                            <script>
+                                <block s="setPenColorDimension">
+                                    <l>
+                                        <option>brightness</option>
+                                    </l>
+                                    <l>100</l>
+                                </block>
+                                <block s="setPenColorDimension">
+                                    <l>
+                                        <option>hue</option>
+                                    </l>
+                                    <block s="reportListItem">
+                                        <block var="i"/>
+                                        <block var="rainbow color pallete"/>
+                                    </block>
+                                </block>
+                                <custom-block s="random position"></custom-block>
+                                <custom-block s="Dot %s Size">
+                                    <block s="reportRandom">
+                                        <l>10</l>
+                                        <l>25</l>
+                                    </block>
+                                </custom-block>
+                            </script>
+                        </block>
+                    </script>
+                    <scripts>
+                        <script x="93" y="274.8">
+                            <block s="up"></block>
+                        </script>
+                    </scripts>
+                </block-definition>
+                <block-definition s="$flash remove duplicates from %&apos;data&apos;" type="reporter" category="lists">
+                    <comment x="0" y="0" w="209" collapsed="false">Reports a new list whose items are the same as in the input list, except that if two or more equal items appear in the input list, only the last one is kept in the result.</comment>
+                    <header></header>
+                    <code></code>
+                    <translations>ca:elimina els duplicats de _&#xD;</translations>
+                    <inputs>
+                        <input type="%l"></input>
+                    </inputs>
+                    <script>
+                        <block s="doReport">
+                            <block s="reportListItem">
+                                <l>1</l>
+                                <block s="reportListAttribute">
+                                    <l>
+                                        <option>columns</option>
+                                    </l>
+                                    <block s="reportApplyExtension">
+                                        <l>dta_analyze(list)</l>
+                                        <list>
+                                            <block var="data"/>
+                                        </list>
+                                    </block>
+                                </block>
+                            </block>
+                        </block>
+                    </script>
+                </block-definition>
+                <block-definition s="$flash sort %&apos;data&apos; ordering with %&apos;function&apos;" type="reporter" category="lists">
+                    <comment x="0" y="0" w="161.14285714285708" collapsed="false">Reports a sorted version of the list in its first input slot, using the comparison function in the second input slot.  For a list of numbers, using &lt; as the comparison function will sort from low to high; using &gt; will sort from high to low.</comment>
+                    <header></header>
+                    <code></code>
+                    <translations>ca:ordena _ segons criteri _&#xD;</translations>
+                    <inputs>
+                        <input type="%l"></input>
+                        <input type="%predRing"></input>
+                    </inputs>
+                    <script>
+                        <block s="doReport">
+                            <block s="reportApplyExtension">
+                                <l>lst_sort(list, fn)</l>
+                                <list>
+                                    <block var="data"/>
+                                    <block var="function"/>
+                                </list>
+                            </block>
+                        </block>
+                    </script>
+                </block-definition>
+                <block-definition s="$flash assoc %&apos;key&apos; %&apos;a-list&apos;" type="reporter" category="lists">
+                    <comment x="0" y="0" w="289.3333333333333" collapsed="false">The second input is an &quot;association list,&quot; a list of two-item lists.  Each of those smaller lists has a &quot;key&quot; as its first item and a &quot;value&quot; as its second.  ASSOC reports the first key-value pair in the association list whose key matches the first input.</comment>
+                    <header></header>
+                    <code></code>
+                    <translations>ca:associació _ _&#xD;</translations>
+                    <inputs>
+                        <input type="%s"></input>
+                        <input type="%l"></input>
+                    </inputs>
+                    <script>
+                        <block s="doReport">
+                            <block s="reportAtomicFindFirst">
+                                <block s="reifyPredicate">
+                                    <autolambda>
+                                        <block s="reportEquals">
+                                            <block var="key"/>
+                                            <block s="reportListItem">
+                                                <l>1</l>
+                                                <l/>
+                                            </block>
+                                        </block>
+                                    </autolambda>
+                                    <list></list>
+                                </block>
+                                <block var="a-list"/>
+                            </block>
+                        </block>
+                    </script>
+                </block-definition>
+                <block-definition s="%&apos;#&apos; for each %&apos;item&apos; of %&apos;data&apos; %&apos;action&apos;" type="command" category="lists">
+                    <comment x="0" y="0" w="228.57142857142858" collapsed="false">This block carries out the given script for each item of the given list, like the primitive FOR EACH.&#xD;&#xD;What&apos;s different is that it provides the # variable, which will contain the item number in the list of each item in turn, 1 while processing item 1, and so on.</comment>
+                    <header></header>
+                    <code></code>
+                    <translations>ca:_ per cada _ de _ _&#xD;</translations>
+                    <inputs>
+                        <input type="%upvar"></input>
+                        <input type="%upvar"></input>
+                        <input type="%l"></input>
+                        <input type="%ca"></input>
+                    </inputs>
+                    <script>
+                        <block s="doForEach">
+                            <l>inner item</l>
+                            <block var="data"/>
+                            <script>
+                                <block s="doSetVar">
+                                    <l>item</l>
+                                    <block var="inner item"/>
+                                </block>
+                                <block s="doChangeVar">
+                                    <l>#</l>
+                                    <l>1</l>
+                                </block>
+                                <block s="doRun">
+                                    <block var="action"/>
+                                    <list></list>
+                                </block>
+                            </script>
+                        </block>
+                    </script>
+                </block-definition>
+                <block-definition s="☠︎ linked? %&apos;data&apos;" type="predicate" category="lists" helper="true">
+                    <header></header>
+                    <code></code>
+                    <translations></translations>
+                    <inputs>
+                        <input type="%l"></input>
+                    </inputs>
+                    <script>
+                        <block s="doReport">
+                            <block s="reportApplyExtension">
+                                <l>lst_linked(list)</l>
+                                <list>
+                                    <block var="data"/>
+                                </list>
+                            </block>
+                        </block>
+                    </script>
+                </block-definition>
+                <block-definition s="☠︎ link %&apos;data&apos;" type="reporter" category="lists" helper="true">
+                    <header></header>
+                    <code></code>
+                    <translations></translations>
+                    <inputs>
+                        <input type="%l"></input>
+                    </inputs>
+                    <script>
+                        <block s="doIf">
+                            <block s="reportListIsEmpty">
+                                <block var="data"/>
+                            </block>
+                            <script>
+                                <block s="doReport">
+                                    <block var="data"/>
+                                </block>
+                            </script>
+                        </block>
+                        <block s="doReport">
+                            <block s="reportCONS">
+                                <block s="reportListItem">
+                                    <l>1</l>
+                                    <block var="data"/>
+                                </block>
+                                <block s="reportCDR">
+                                    <block var="data"/>
+                                </block>
+                            </block>
+                        </block>
+                    </script>
+                </block-definition>
+                <block-definition s="printable %&apos;data&apos;" type="reporter" category="lists">
+                    <comment x="0" y="0" w="188.66666666666666" collapsed="false">Takes a (possibly deep) list as input,&#xD;and reports a human-readable text form &#xD;of the list (namely, Lisp notation).&#xD;&#xD;Will not work on circular lists.</comment>
+                    <header></header>
+                    <code></code>
+                    <translations>ca:notació textual de _&#xD;</translations>
+                    <inputs>
+                        <input type="%l"></input>
+                    </inputs>
+                    <script>
+                        <block s="doIf">
+                            <block s="reportNot">
+                                <block s="reportIsA">
+                                    <block var="data"/>
+                                    <l>
+                                        <option>list</option>
+                                    </l>
+                                </block>
+                            </block>
+                            <script>
+                                <block s="doReport">
+                                    <block var="data"/>
+                                </block>
+                            </script>
+                        </block>
+                        <block s="doIf">
+                            <block s="reportListIsEmpty">
+                                <block var="data"/>
+                            </block>
+                            <script>
+                                <block s="doReport">
+                                    <l>()</l>
+                                </block>
+                            </script>
+                        </block>
+                        <block s="doReport">
+                            <block s="reportJoinWords">
+                                <list>
+                                    <l>(</l>
+                                    <block s="reportAtomicCombine">
+                                        <block s="reportMap">
+                                            <block s="reifyReporter">
+                                                <autolambda>
+                                                    <custom-block s="printable %l">
+                                                        <l/>
+                                                    </custom-block>
+                                                </autolambda>
+                                                <list></list>
+                                            </block>
+                                            <block var="data"/>
+                                        </block>
+                                        <block s="reifyReporter">
+                                            <autolambda>
+                                                <block s="reportJoinWords">
+                                                    <list>
+                                                        <l></l>
+                                                        <l></l>
+                                                        <l></l>
+                                                    </list>
+                                                </block>
+                                            </autolambda>
+                                            <list></list>
+                                        </block>
+                                    </block>
+                                    <l>)</l>
+                                </list>
+                            </block>
+                        </block>
+                    </script>
+                </block-definition>
+                <block-definition s="sentence %&apos;phrase&apos;" type="reporter" category="lists">
+                    <comment x="0" y="0" w="302.6666666666667" collapsed="false">SENTENCE is the main constructor for sentences, represented&#xD;as lists of words.  It takes zero or more inputs, each of which can&#xD;be either a list or a text string.  If a list, the input is assumed to be&#xD;a list of words.  If a text string, it is converted to a list of words using&#xD;SENTENCE→LIST.  Then all the lists of words are appended to form a new list of words.&#xD;&#xD;If the inputs are lists of lists rather than lists of words, SENTENCE,&#xD;like APPEND, does only one level of flattening, reporting a list of&#xD;all the items of all the input lists.</comment>
+                    <header></header>
+                    <code></code>
+                    <translations>ca:frase _&#xD;</translations>
+                    <inputs>
+                        <input type="%mult%s"></input>
+                    </inputs>
+                    <script>
+                        <block s="doReport">
+                            <block s="reportConcatenatedLists">
+                                <block s="reportMap">
+                                    <block s="reifyReporter">
+                                        <autolambda>
+                                            <block s="reportIfElse">
+                                                <block s="reportIsA">
+                                                    <l></l>
+                                                    <l>
+                                                        <option>list</option>
+                                                    </l>
+                                                </block>
+                                                <l></l>
+                                                <custom-block s="sentence $arrowRight list %txt">
+                                                    <l></l>
+                                                </custom-block>
+                                            </block>
+                                        </autolambda>
+                                        <list></list>
+                                    </block>
+                                    <block var="phrase"/>
+                                </block>
+                            </block>
+                        </block>
+                    </script>
+                </block-definition>
+                <block-definition s="$flash zip %&apos;lists&apos;" type="reporter" category="lists">
+                    <comment x="0" y="0" w="192" collapsed="false">ZIP takes any number of lists as inputs.  The lists should all be the same length.  ZIP reports a list of lists in which the first item is a list of all the first items, the second item is a list of all the second items, etc.&#xD;Viewing the inputs as the rows of a matrix, ZIP reports its transpose.</comment>
+                    <header></header>
+                    <code></code>
+                    <translations></translations>
+                    <inputs>
+                        <input type="%mult%l"></input>
+                    </inputs>
+                    <script>
+                        <block s="doReport">
+                            <block s="reportListAttribute">
+                                <l>
+                                    <option>columns</option>
+                                </l>
+                                <block var="lists"/>
+                            </block>
+                        </block>
+                    </script>
+                </block-definition>
+                <block-definition s="%&apos;x&apos;" type="reporter" category="lists">
+                    <comment x="0" y="0" w="105.33333333333333" collapsed="false">The identity function reports its input.</comment>
+                    <header></header>
+                    <code></code>
+                    <translations></translations>
+                    <inputs>
+                        <input type="%s"></input>
+                    </inputs>
+                    <script>
+                        <block s="doReport">
+                            <block var="x"/>
+                        </block>
+                    </script>
+                </block-definition>
+                <block-definition s="multimap %&apos;function&apos; over %&apos;lists&apos;" type="reporter" category="lists">
+                    <comment x="0" y="0" w="267.3333333333333" collapsed="false">Takes as input a function of N inputs and N lists.&#xD;The function is called with item 1 of all the lists as its inputs, with item 2 of all the lists as its inputs, and so on.  (The lists should all be the same length.)</comment>
+                    <header></header>
+                    <code></code>
+                    <translations>ca:multi-mapeja _ sobre _&#xD;</translations>
+                    <inputs>
+                        <input type="%repRing"></input>
+                        <input type="%mult%l"></input>
+                    </inputs>
+                    <script>
+                        <block s="doReport">
+                            <block s="reportMap">
+                                <block s="reifyReporter">
+                                    <autolambda>
+                                        <block s="evaluate">
+                                            <block var="function"/>
+                                            <custom-block s="%s">
+                                                <l></l>
+                                            </custom-block>
+                                        </block>
+                                    </autolambda>
+                                    <list></list>
+                                </block>
+                                <custom-block s="$flash zip %mult%l">
+                                    <block var="lists"/>
+                                </custom-block>
+                            </block>
+                        </block>
+                    </script>
+                </block-definition>
+                <block-definition s="sentence $arrowRight list %&apos;text&apos;" type="reporter" category="operators">
+                    <comment x="0" y="0" w="196" collapsed="false">Takes a sentence in text string form and reports the sentence as a list of its words.</comment>
+                    <header></header>
+                    <code></code>
+                    <translations>de:Satz $arrowRight Liste _&#xD;ca:frase $arrowRight llista _&#xD;es:frase $arrowRight lista _&#xD;fr:phrase $arrowRight liste _&#xD;pt:uma lista com as palavras da frase _&#xD;</translations>
+                    <inputs>
+                        <input type="%txt"></input>
+                    </inputs>
+                    <script>
+                        <block s="doReport">
+                            <block s="reportAtomicKeep">
+                                <block s="reifyPredicate">
+                                    <autolambda>
+                                        <block s="reportNot">
+                                            <block s="reportEquals">
+                                                <block s="reportStringSize">
+                                                    <l></l>
+                                                </block>
+                                                <l>0</l>
+                                            </block>
+                                        </block>
+                                    </autolambda>
+                                    <list></list>
+                                </block>
+                                <block s="reportTextSplit">
+                                    <block var="text"/>
+                                    <l>
+                                        <option>whitespace</option>
+                                    </l>
+                                </block>
+                            </block>
+                        </block>
+                    </script>
+                </block-definition>
+                <block-definition s="display Blue color pallete" type="command" category="motion">
+                    <header></header>
+                    <code></code>
+                    <translations></translations>
+                    <inputs></inputs>
+                    <script>
+                        <block s="setPenColorDimension">
+                            <l>
+                                <option>saturation</option>
+                            </l>
+                            <l>100</l>
+                        </block>
+                        <block s="setSize">
+                            <l>100</l>
+                        </block>
+                        <block s="down"></block>
+                        <block s="doFor">
+                            <l>i</l>
+                            <l>1</l>
+                            <block s="reportListAttribute">
+                                <l>
+                                    <option>length</option>
+                                </l>
+                                <block var="Blue Color Pallete"/>
+                            </block>
+                            <script>
+                                <block s="setPenColorDimension">
+                                    <l>
+                                        <option>hue</option>
+                                    </l>
+                                    <block s="reportListItem">
+                                        <block var="i"/>
+                                        <block var="Blue Color Pallete"/>
+                                    </block>
+                                </block>
+                                <block s="forward">
+                                    <l>30</l>
+                                </block>
+                            </script>
+                        </block>
+                        <block s="up"></block>
+                    </script>
+                </block-definition>
+                <block-definition s="display rainbow color pallete" type="command" category="motion">
+                    <header></header>
+                    <code></code>
+                    <translations></translations>
+                    <inputs></inputs>
+                    <script>
+                        <block s="setPenColorDimension">
+                            <l>
+                                <option>saturation</option>
+                            </l>
+                            <l>100</l>
+                        </block>
+                        <block s="setSize">
+                            <l>100</l>
+                        </block>
+                        <block s="down"></block>
+                        <block s="doFor">
+                            <l>i</l>
+                            <l>1</l>
+                            <block s="reportListAttribute">
+                                <l>
+                                    <option>length</option>
+                                </l>
+                                <block var="rainbow color pallete"/>
+                            </block>
+                            <script>
+                                <block s="setPenColorDimension">
+                                    <l>
+                                        <option>hue</option>
+                                    </l>
+                                    <block s="reportListItem">
+                                        <block var="i"/>
+                                        <block var="rainbow color pallete"/>
+                                    </block>
+                                </block>
+                                <block s="forward">
+                                    <l>30</l>
+                                </block>
+                            </script>
+                        </block>
+                        <block s="up"></block>
+                    </script>
+                </block-definition>
+                <block-definition s="Blue background colors" type="command" category="motion">
+                    <header></header>
+                    <code></code>
+                    <translations></translations>
+                    <inputs></inputs>
+                    <script>
+                        <block s="setPenColorDimension">
+                            <l>
+                                <option>brightness</option>
+                            </l>
+                            <l>75</l>
+                        </block>
+                        <block s="doRepeat">
+                            <l>50</l>
+                            <script>
+                                <block s="doGotoObject">
+                                    <l>
+                                        <option>random position</option>
+                                    </l>
+                                </block>
+                                <block s="setHeading">
+                                    <block s="reportRandom">
+                                        <l>1</l>
+                                        <l>360</l>
+                                    </block>
+                                </block>
+                                <custom-block s="display Blue color pallete"></custom-block>
+                            </script>
+                        </block>
+                    </script>
+                </block-definition>
+                <block-definition s="palletes" type="command" category="motion">
+                    <header></header>
+                    <code></code>
+                    <translations></translations>
+                    <inputs></inputs>
+                    <script>
+                        <block s="doSetVar">
+                            <l>Blue Color Pallete</l>
+                            <block s="reportNewList">
+                                <list>
+                                    <l>50</l>
+                                    <l>51</l>
+                                    <l>52</l>
+                                    <l>53</l>
+                                    <l>55</l>
+                                    <l>57</l>
+                                    <l>59</l>
+                                    <l>61</l>
+                                    <l>63</l>
+                                    <l>65</l>
+                                </list>
+                            </block>
+                        </block>
+                        <block s="doSetVar">
+                            <l>rainbow color pallete</l>
+                            <block s="reportNewList">
+                                <list>
+                                    <l>70</l>
+                                    <l>45</l>
+                                    <l>90</l>
+                                    <l>80</l>
+                                    <l>30</l>
+                                    <l>40</l>
+                                    <l>20</l>
+                                    <l>10</l>
+                                    <l>100</l>
+                                    <l>120</l>
+                                    <l>105</l>
+                                    <l>110</l>
+                                    <l>70</l>
+                                    <l>75</l>
+                                    <l>83</l>
+                                </list>
+                            </block>
+                        </block>
+                    </script>
+                    <scripts>
+                        <script x="30" y="143.8">
+                            <custom-block s="$flash assoc %s %l">
+                                <l>Red</l>
+                                <block s="reportNewList">
+                                    <list>
+                                        <block s="reportNewList">
+                                            <list>
+                                                <l>Red</l>
+                                                <l>4</l>
+                                            </list>
+                                        </block>
+                                        <block s="reportNewList">
+                                            <list>
+                                                <l>Orange</l>
+                                                <l>9</l>
+                                            </list>
+                                        </block>
+                                        <block s="reportNewList">
+                                            <list>
+                                                <l>Green</l>
+                                                <l>37</l>
+                                            </list>
+                                        </block>
+                                        <block s="reportNewList">
+                                            <list>
+                                                <l>Blue</l>
+                                                <l>61</l>
+                                            </list>
+                                        </block>
+                                        <l></l>
+                                        <l></l>
+                                    </list>
+                                </block>
+                            </custom-block>
+                        </script>
+                        <script x="71" y="218.8">
+                            <block s="reportListItem">
+                                <l>1</l>
+                                <block s="reportListItem">
+                                    <l>1</l>
+                                    <l/>
+                                </block>
+                            </block>
+                        </script>
+                    </scripts>
+                </block-definition>
+            </blocks>
+            <stage name="Stage" width="480" height="360" costume="0" color="255,255,255,1" tempo="60" threadsafe="false" penlog="false" volume="100" pan="0" lines="round" ternary="false" hyperops="true" codify="false" inheritance="true" sublistIDs="false" id="429">
+                <pentrails>data:image/png;base64,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</pentrails>
+                <costumes>
+                    <list struct="atomic" id="430"></list>
+                </costumes>
+                <sounds>
+                    <list struct="atomic" id="431"></list>
+                </sounds>
+                <variables></variables>
+                <blocks></blocks>
+                <scripts></scripts>
+                <sprites select="1">
+                    <sprite name="Sprite" idx="1" x="-180.54131087028145" y="39.543363771009496" heading="5" scale="1" volume="100" pan="0" rotation="1" draggable="true" costume="0" color="0,156.82499999999996,191.25,1" pen="tip" id="436">
+                        <costumes>
+                            <list struct="atomic" id="437"></list>
+                        </costumes>
+                        <sounds>
+                            <list struct="atomic" id="438"></list>
+                        </sounds>
+                        <blocks></blocks>
+                        <variables></variables>
+                        <scripts>
+                            <script x="30" y="30">
+                                <block s="receiveGo"></block>
+                                <custom-block s="palletes"></custom-block>
+                                <custom-block s="Blue background colors"></custom-block>
+                                <block s="doRepeat">
+                                    <l>50</l>
+                                    <script>
+                                        <custom-block s="polka dot"></custom-block>
+                                    </script>
+                                </block>
+                            </script>
+                        </scripts>
+                    </sprite>
+                    <watcher var="Blue Color Pallete" style="normal" x="11" y="15" color="243,118,29" extX="80" extY="70"/>
+                    <watcher var="rainbow color pallete" style="normal" x="10" y="10" color="243,118,29" extX="80" extY="70"/>
+                </sprites>
+            </stage>
+            <variables>
+                <variable name="Blue Color Pallete">
+                    <list struct="atomic" id="453">50,51,52,53,55,57,59,61,63,65</list>
+                </variable>
+                <variable name="rainbow color pallete">
+                    <list struct="atomic" id="454">70,45,90,80,30,40,20,10,100,120,105,110,70,75,83</list>
+                </variable>
+            </variables>
+        </scene>
+    </scenes>
+</project>
